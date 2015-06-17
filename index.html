@@ -312,7 +312,23 @@ function  create(request, reply) {
               </code></pre>
           </section>
           <section>
-            <h5><frhapi>Error handling</frhapi></h5>
+              <h5><frhapi>Error handling</frhapi></h5>
+              <pre><code data-trim>
+var Boom = require('boom');
+//....
+server.route({
+    method: 'GET',  path: '/meetups/{id}',
+    handler: function getMeetup(request, reply) {
+        if (!request.params.id) {
+            return reply(Boom.badRequest('No id was provided'));
+        }
+        MeetupDAO.get(request.params.id, function (err, meetup) {
+            if(err) reply(Boom.wrap(err, 500));
+            else reply(meetup);
+        });
+    }
+});
+              </code></pre>
           </section>
         </section>
 
