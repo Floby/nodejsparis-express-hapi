@@ -2,7 +2,7 @@ section.links {
   font-size: 80%
 }
 .reveal section.links a {
-  color: lightblue;
+  color: #00a9c5;
 }
 p.link {
   text-align: left;
@@ -67,6 +67,9 @@ section.twins > .twin + :not(.twin) {
 .presentation h4,
 .presentation h2 {
   color: black;
+}
+.reveal .presentation a {
+  color: #00a9c5;
 }
 
 .reveal section.presentation img {
