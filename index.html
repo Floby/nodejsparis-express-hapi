@@ -146,20 +146,22 @@
           </section>
           <section>
               <h5><frexpr>Routes</frexpr></h5>
-              <pre>app.route('/meetups')
+              <pre><code data-trim>
+app.route('/meetups')
     .get(MeetupController.all)
     .post(MeetupController.create);
 
-  app.route('/meetups/:id')
+app.route('/meetups/:id')
     .get(MeetupController.get)
     .put(MeetupController.update)
     .patch(MeetupController.partialUpdate)
     .delete(MeetupController.remove);
-</pre>
+              </code></pre>
           </section>
           <section>
               <h5><frexpr>Controllers</frexpr></h5>
-              <pre>function all(req, res) {
+              <pre><code data-trim>
+function all(req, res) {
     MeetupDAO.all(function (all) {
         res.json(all);
     });
@@ -176,7 +178,7 @@ function create(req, res) {
         res.status(201).json({});
     });
 }
-              </pre>
+              </code></pre>
           </section>
           <section>
             <h5><frexpr>Error handling</frexpr></h5>
@@ -194,24 +196,25 @@ function create(req, res) {
           </section>
           <section>
               <h5><frhapi>Controllers</frhapi></h5>
-              <pre>  function all(request, reply) {
-      MeetupDAO.all(function (all) {
-          reply(all);
-      });
-  }
-  function  create(request, reply) {
-      if (!request.payload.url) {
-          return reply().code(400);
-      }
-      var meetup = Meetup.create(request.payload.url,
-                                 request.payload.title, request.payload.date);
+              <pre><code data-trim>
+function all(request, reply) {
+    MeetupDAO.all(function (all) {
+        reply(all);
+    });
+}
+function  create(request, reply) {
+    if (!request.payload.url) {
+        return reply().code(400);
+    }
+    var meetup = Meetup.create(request.payload.url,
+                               request.payload.title, request.payload.date);
 
-      MeetupDAO.save(meetup, function (newMeetup) {
-          reply().created(meetupsEndpoint + '/' + newMeetup._id);
-      });
-  }
+    MeetupDAO.save(meetup, function (newMeetup) {
+        reply().created(meetupsEndpoint + '/' + newMeetup._id);
+    });
+}
 
-              </pre>
+              </code></pre>
           </section>
           <section>
             <h5><frhapi>Error handling</frhapi></h5>
