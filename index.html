@@ -223,12 +223,23 @@ function create(req, res) {
             <h5><frexpr>Error handling</frexpr></h5>
 
             <pre><code data-trim>
+var StandardError = require('standard-error');
+
 app.use(function (err, req, res, next) {
   if (err instanceof IKnowThisError) {
     res.status(503).json({
       error: 'service_unavaible',
       reason: 'Looks like one of our partners is not doing his job'
     });
+  } else {
+    next(err);
+  }
+});
+
+app.use(function (err, req, res, next) {
+  if (err instanceof StandardError) {
+    res.status(err.code);
+    res.json(error.toJSON());
   } else {
     next(err);
   }
@@ -243,7 +254,6 @@ app.use(function (err, req, res, next) {
               Exemple CRUD <frhapi>Hapi</frhapi>
             </h4>
             <pre><code data-trim>
-var Hapi = require('Hapi');
 var MeetupDAO = require(somePath)(someConfiguration);
 
 var server = new Hapi.Server({ load: {sampleInterval: 5000}});
@@ -257,7 +267,8 @@ server.route([
               if(err) reply().code(500);
               else reply(meetups);
           });
-      }}
+      }
+    }
     // autres routes.
 ]);
 
