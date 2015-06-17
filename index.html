@@ -145,6 +145,30 @@
             </pre>
           </section>
           <section>
+              <h5><frexpr>MiddleWare</frexpr></h5>
+              <pre><code data-trim>
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+
+// loading
+app.use(bodyParser.json());
+app.use(morgan('combined'));
+
+// declaration
+function logger(request, response, next) {
+    var start = +new Date();
+    var url = request.url;
+    var method = request.method;
+
+    response.on('finish', function() {
+          var duration = +new Date() - start;
+        console.log(method + ' ' + url +' (' + duration + ')');
+    });
+    next();
+}
+              </code></pre>
+          </section>
+          <section>
               <h5><frexpr>Routes</frexpr></h5>
               <pre><code data-trim>
 app.route('/meetups')
@@ -190,6 +214,31 @@ function create(req, res) {
             <h4>
               Exemple CRUD <frhapi>Hapi</frhapi>
             </h4>
+            <pre><code data-trim>
+var Hapi = require('Hapi');
+var MeetupDAO = require(somePath)(someConfiguration);
+
+var hapiConfig = { load: {sampleInterval: 5000}}; // §ask: inline
+var server = new Hapi.Server(hapiConfig);
+server.connection({port: 3000});
+
+server.route([
+    { method: 'GET',
+      path: '/meetup',
+      handler: function (request, reply) {
+          MeetupDAO.all(function (err, meetups) {
+              if(err) reply().code(500);
+              else reply(meetups);
+          });
+      }
+    }
+    // autres routes.
+]);
+
+server.start(function () {
+    console.log('Server running at:', server.info.uri);
+});
+            </code></pre>
           </section>
           <section>
             <h5><frhapi>Handlers</frhapi></h5>
