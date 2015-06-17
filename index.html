@@ -254,7 +254,28 @@ server.start(function () {
             </code></pre>
           </section>
           <section>
-            <h5><frhapi>Handlers</frhapi></h5>
+            <h5><frhapi>Routes</frhapi></h5>
+            <pre><code data-trim>
+var meetupRoutes = [
+    { method: 'GET', path: '/meetups', handler: MeetupController.all },
+    {
+      method: 'POST', path: '/meetups',
+      config: {
+          handler: MeetupController.create,
+          validate: {payload: schemas.meetupCreate}
+      }
+    },
+    {
+      method: 'PUT', path: '/meetups/{id}',
+      config: {
+          handler: MeetupController.update,
+          validate: { payload: schemas.meetupUpdate }
+      }
+    },
+    { method: 'DELETE', path: '/meetups/{id}', handler: MeetupController.remove },
+    { method: 'GET', path: '/meetups/{id}', handler: MeetupController.get },
+];
+            </code></pre>
           </section>
           <section>
               <h5><frhapi>Controllers</frhapi></h5>
@@ -275,7 +296,6 @@ function  create(request, reply) {
         reply().created(meetupsEndpoint + '/' + newMeetup._id);
     });
 }
-
               </code></pre>
           </section>
           <section>
