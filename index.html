@@ -347,7 +347,7 @@ server.route({
           <section>
             <h3>Injection de dépendances</h3>
             <ul>
-              <li>"Inverison de contrôle"</li>
+              <li>"Inversion de contrôle"</li>
               <li>Ne pas instancier ses classes de délégation dans le code qui les utilise</li>
             </ul>
           </section>
@@ -360,6 +360,7 @@ app.set('db', someDbConnection) // injecte 'db' dans 'app'
 app.use(bodyparse.json()); // injecte `.body` dans `req`
 app.use(cookieparser()); // injecte `.cookies` dans `req`
 app.use(session()); // injecte `.session` dans `req`
+
 app.use(function currentUser(req, res, next) {
   var userId = req.session.userId;
   if (!userId) return next();
@@ -463,7 +464,7 @@ server.register({
           <p><em><small>have some more links</small></em></p>
             <p class="link">
               <img class="qr" src="images/link-github.svg" alt="">
-              <a href="https://github.com/AdrieanKhisbe/pending-link">Dépot Github</a>
+              <a href="https://github.com/AdrieanKhisbe/pending-link">Dépot Github du comparatif</a>
             </p>
             <p class="link">
               <img class="qr" src="images/link-node-for-api.svg" alt="">
