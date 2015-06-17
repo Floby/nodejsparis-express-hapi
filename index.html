@@ -139,10 +139,25 @@
             <h4>
               Exemple CRUD <frexpr>Express</frexpr>
             </h4>
-            <pre>
+            <pre><code data-trim>
+var express = require('express');
+var app = express();
+var MeetupDAO = require(somePath)(someConfiguration);
 
+app.get('/meetups', function (req, res) {
+    MeetupDAO.all(function (err, meetups) {
+        if(err) res.sendStatus(500);
+        else res.json(meetups);
+    });
+});
+// autres routes CRUD: collection.post, member.get,put,delete .
 
-            </pre>
+var server = app.listen(3000, function () {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('Example app listening at http://%s:%s', host, port);
+});
+            </code></pre>
           </section>
           <section>
               <h5><frexpr>MiddleWare</frexpr></h5>
@@ -218,20 +233,18 @@ function create(req, res) {
 var Hapi = require('Hapi');
 var MeetupDAO = require(somePath)(someConfiguration);
 
-var hapiConfig = { load: {sampleInterval: 5000}}; // §ask: inline
-var server = new Hapi.Server(hapiConfig);
+var server = new Hapi.Server({ load: {sampleInterval: 5000}});
 server.connection({port: 3000});
 
 server.route([
     { method: 'GET',
-      path: '/meetup',
+      path: '/meetups',
       handler: function (request, reply) {
           MeetupDAO.all(function (err, meetups) {
               if(err) reply().code(500);
               else reply(meetups);
           });
-      }
-    }
+      }}
     // autres routes.
 ]);
 
