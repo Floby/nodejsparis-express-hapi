@@ -1,3 +1,5 @@
+.*.un~
+.*.sw[a-z]
 .DS_Store
 .svn
 log/*.log
