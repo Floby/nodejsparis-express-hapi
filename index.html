@@ -303,18 +303,61 @@ function  create(request, reply) {
           </section>
         </section>
 
-        <section class="twins">
-          <h4>Injection de dépendances</h4>
-          <div class="twin">
+        <section>
+          <section>
+            <h3>Injection de dépendances</h3>
+            <ul>
+              <li>"Inverison de contrôle"</li>
+              <li>Ne pas instancier ses classes de délégation dans le code qui les utilise</li>
+            </ul>
+          </section>
+          <section>
             <h5>
               <frexpr>Express</frexpr>
             </h5>
-          </div>
-          <div class="twin">
+            <pre><code data-trim>
+app.set('db', someDbConnection) // injecte 'db' dans 'app'
+app.use(bodyparse.json()); // injecte `.body` dans `req`
+app.use(cookieparser()); // injecte `.cookies` dans `req`
+app.use(session()); // injecte `.session` dans `req`
+app.use(function currentUser(req, res, next) {
+  var userId = req.session.userId;
+  if (!userId) return next();
+  app.get('db').users.findOne({_id: userId}, function (err, user) {
+    if (err) return next(err);
+    req.currentUser = user // injection de l'utilsateur courant
+  });
+});
+
+            </code></pre>
+          </section>
+          <section>
             <h5>
               <frhapi>Hapi</frhapi>
             </h5>
-          </div>
+            <pre><code data-trim>
+
+
+server.bind({db: someDbConnection});
+server.register({
+  // injecte `.session` sur l'objet `.request`
+  register: require('yar')
+})
+
+// ...
+{
+  method: 'GET',
+  path: '/current-user',
+  handler: function (request, reply) {
+    this.db.users.findOne({_id: request.session.userId}, function (err, user) {
+      if (err) return reply(err);
+      reply(user);
+    })
+  }
+}
+
+            </code></pre>
+          </section>
         </section>
 
         <section>

@@ -1,6 +1,9 @@
 section.links {
   font-size: 80%
 }
+.reveal section.links a {
+  color: lightblue;
+}
 p.link {
   text-align: left;
 }
