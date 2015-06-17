@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Node.js Streams</title>
+		<title>Express vs. Hapi</title>
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -35,14 +35,15 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Node.js : Streams</h1>
+					<h1>Express vs. Hapi</h1>
           <aside class="notes">
             Hello world, notes
           </aside>
 				</section>
 
-        <section data-background="white" class="presentation">
-            <h2>Qui suis-je ?</h2>
+        <section data-background="white" class="presentation twins">
+          <h2>Qui sommes-nous ?</h2>
+          <div class="twin">
             <h4 class="florent-name">Florent Jaby</h4>
             <p>
                 <ul>
@@ -51,19 +52,194 @@
                     <li><a href="http://github.com/Floby">@Floby</a> sur Github et le reste d'internet</li>
                 </ul>
             </p>
-            <img src="images/octo-logo.png" alt="OCTO Technology" class="octo-logo pull-right" />
+          </div>
+          <div class="twin">
+            <h4 class="florent-name">Adrien Becchis</h4>
+            <p>
+                <ul>
+                    <li>En stage chez OCTO Technology</li>
+                    <li>Noder depuis 2015 =)</li>
+                    <li><a href="https://github.com/AdrieanKhisbe">@AdrieanKhisbe</a> sur Github</li>
+                </ul>
+            </p>
+          </div>
+          <img src="images/octo-logo.png" alt="OCTO Technology" class="octo-logo pull-right" />
         </section>
 
         <section>
-          <h2>Qu'est-ce qu'un stream ?</h2>
+          <h3>Quelques stats</h3>
           <p>
-            <ul class="fragment">
-              <li>Une métaphore</li>
-              <li>Un pattern</li>
-              <li>Une classe</li>
-            </ul>
+            <table >
+                <thead>
+                    <tr>
+                        <td scope="col" class="left"><strong>Métriques</strong></td>
+                        <td scope="col" class="left"><frexpr>Express</frexpr></td>
+                        <td scope="col" class="left"><frhapi>Hapi</frhapi></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Github stars</th>
+                        <td>19k</td>
+                        <td>4,2k</td>
+                    </tr>
+                    <tr>
+                        <th>Github fork</th>
+                        <td>3,6k</td>
+                        <td>0,6k</td>
+                    </tr>
+                    <tr>
+                        <th>StackOverflow</th>
+                        <td>15k</td>
+                        <td>180</td>
+                    </tr>
+                    <tr>
+                        <th>Contributor</th>
+                        <td>177</td>
+                        <td>114</td>
+                    </tr>
+                    <tr>
+                        <th>Github require</th>
+                        <td>~360k</td>
+                        <td>6k</td>
+                    </tr>
+                    <tr>
+                      <th>First Commit</th>
+                      <td>26 Juin 2009</td>
+                      <td>6 Août 2011</td>
+                    </tr>
+                </tbody>
+            </table>
           </p>
         </section>
+
+        <section>
+          <h4>
+            Fonctionnement d'<frexpr>Express</frexpr>
+          </h4>
+          <img src="images/express-lifecycle.png" class="schema">
+          <small>Cycle de vie d'une requête HTTP avec Express</small>
+          <img src="images/express-middleware.png" class="schema">
+          <small>Echainement des middlewares</small>
+        </section>
+
+        <section>
+          <h4>
+            Fonctionnement de <frhapi>Hapi</frhapi>
+          </h4>
+          <img src="images/hapi-lifecycle.png" class="schema">
+          <small>Cycle de vie d'une requête HTTP avec Hapi</small>
+          <img src="images/hapi-hooks.png" class="schema">
+          <small>"Hooks" disponible en Hapi</small>
+        </section>
+
+
+        <section>
+          <section>
+            <h4>
+              Exemple CRUD <frexpr>Express</frexpr>
+            </h4>
+          </section>
+          <section>
+            <h5><frexpr>Routes</frexpr></h5>
+          </section>
+          <section>
+            <h5><frexpr>Controllers</frexpr></h5>
+          </section>
+          <section>
+            <h5><frexpr>Error handling</frexpr></h5>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>
+              Exemple CRUD <frhapi>Hapi</frhapi>
+            </h4>
+          </section>
+          <section>
+            <h5><frhapi>Handlers</frhapi></h5>
+          </section>
+          <section>
+            <h5><frhapi>Controllers</frhapi></h5>
+          </section>
+          <section>
+            <h5><frhapi>Error handling</frhapi></h5>
+          </section>
+        </section>
+
+        <section class="twins">
+          <h4>Injection de dépendances</h4>
+          <div class="twin">
+            <h5>
+              <frexpr>Express</frexpr>
+            </h5>
+          </div>
+          <div class="twin">
+            <h5>
+              <frhapi>Hapi</frhapi>
+            </h5>
+          </div>
+        </section>
+
+        <section>
+          <section class="twins conclusion">
+            <h4>Conclusion</h4>
+            <div class="twin">
+              <h5>
+                <frexpr>Express</frexpr>
+              </h5>
+              <ul>
+                <li>old-timer</li>
+                <li>"lightweight", "thin", "lean", bref : minimal</li>
+                <li>Incrément et itérations rapides au début</li>
+                <li>Perte de robustesse et de maintenabilité au fil du temps</li>
+              </ul>
+            </div>
+            <div class="twin">
+              <h5>
+                <frhapi>Hapi</frhapi>
+              </h5>
+              <ul>
+                <li>new player</li>
+                <li>"Vrai" framework qui apporte ses conventions et abstractions</li>
+                <li>Courbe d'apprentissage plus forte</li>
+                <li>Plus industriel, plus compréhensible pour les dev non-js</li>
+              </ul>
+            </div>
+            <div></div>
+            <div class="twin">
+              <img src="images/productivity-curve-express.png" alt="">
+            </div>
+            <div class="twin">
+              <img src="images/productivity-curve-hapi.png" alt="">
+            </div>
+          </section>
+          <section class="twins">
+            <h4>Tooling</h4>
+            <div class="twin">
+              <h5>
+                <frexpr>Express</frexpr>
+              </h5>
+              <ul>
+                <li>20k modules npm</li>
+                <li>Les outils <a href="https://github.com/strongloop">StrongLoop</a></li>
+                <li class="fragment">n'importer quel outil unix ;)</li>
+              </ul>
+            </div>
+            <div class="twin">
+              <h5>
+                <frhapi>Hapi</frhapi>
+              </h5>
+              <ul>
+                <li>La suite  <a href="https://github.com/hapijs">"Walmart / Hapijs"</a></li>
+                <li class="fragment">n'importer quel outil unix ;)</li>
+              </ul>
+            </div>
+          </section>
+
+        </section>
+
 
         <section>
           <section>

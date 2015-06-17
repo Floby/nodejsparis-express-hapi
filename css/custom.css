@@ -1,3 +1,37 @@
+body {
+  background-color: #000;
+}
+frexpr {
+  color: #80bd01
+}
+frhapi {
+  color: #52A7E7
+}
+
+.reveal section img.schema {
+  background: white;
+  margin-bottom: 0px;
+}
+
+section.conclusion ul {
+  font-size: 80%;
+}
+
+section.twins {
+  overflow: auto;
+  zoom: 1;
+}
+section.twins > .twin {
+  margin: 0;
+  padding: 0;
+  width: 48%;
+  float: left;
+  margin-right: 2%;
+  display: inline-block;
+}
+section.twins > .twin + :not(.twin) {
+  clear: both;
+}
 
 .pull-left {
   display: inline-block;
