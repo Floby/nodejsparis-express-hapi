@@ -221,6 +221,19 @@ function create(req, res) {
           </section>
           <section>
             <h5><frexpr>Error handling</frexpr></h5>
+
+            <pre><code data-trim>
+app.use(function (err, req, res, next) {
+  if (err instanceof IKnowThisError) {
+    res.status(503).json({
+      error: 'service_unavaible',
+      reason: 'Looks like one of our partners is not doing his job'
+    });
+  } else {
+    next(err);
+  }
+});
+            </code></pre>
           </section>
         </section>
 
